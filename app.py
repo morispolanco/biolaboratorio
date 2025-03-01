@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 import requests
 from fpdf import FPDF
-import os
 import hashlib
+import os
 
 # Configuración inicial de la página
 st.set_page_config(page_title="BioInsights AI", layout="wide")
@@ -35,7 +35,8 @@ def authenticate():
             if st.button("Ingresar"):
                 if username in AUTHORIZED_USERS and hash_password(password) == AUTHORIZED_USERS[username]:
                     st.session_state.logged_in = True
-                    st.experimental_rerun()
+                    st.success("Inicio de sesión exitoso. Por favor, recarga la página.")
+                    st.stop()
                 else:
                     st.error("Usuario o contraseña incorrectos.")
         st.stop()
