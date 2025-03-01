@@ -3,6 +3,7 @@ import requests
 import json
 import pandas as pd
 import plotly.express as px
+from io import StringIO
 
 # Configuración inicial de la página
 st.set_page_config(page_title="BioInsights AI", layout="wide")
@@ -10,6 +11,27 @@ st.set_page_config(page_title="BioInsights AI", layout="wide")
 # Título de la aplicación
 st.title("BioInsights AI 🧪")
 st.markdown("Interpreta resultados bioquímicos y genera informes personalizados con IA.")
+
+# Barra lateral para ofrecer el archivo de muestra
+with st.sidebar:
+    st.header("Descarga un archivo de muestra")
+    st.markdown("Si no estás seguro del formato de los datos, puedes descargar un archivo de muestra:")
+    
+    # Contenido del archivo de muestra (CSV)
+    sample_data = """Paciente,Glucosa,Colesterol,Hemoglobina,Ferritina
+Paciente1,95,200,14.5,80
+Paciente2,110,220,13.8,65
+Paciente3,100,190,15.2,70
+Paciente4,120,240,12.9,50
+Paciente5,90,180,14.0,90"""
+    
+    # Convertir el contenido a un archivo descargable
+    st.download_button(
+        label="Descargar archivo de muestra (CSV)",
+        data=sample_data,
+        file_name="datos_bioquimicos_ejemplo.csv",
+        mime="text/csv"
+    )
 
 # Cargar archivo CSV o Excel
 uploaded_file = st.file_uploader("Carga un archivo CSV o Excel con los resultados del laboratorio:", type=["csv", "xlsx"])
